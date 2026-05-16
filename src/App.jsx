@@ -9,6 +9,9 @@ const carouselImages = Object.values(imageModules)
   .map((module) => module.default)
   .filter((img) => img && !img.toLowerCase().includes('logo')) // Exclude logo from carousel
   .sort(); // Sort for consistent ordering
+const logoImage = Object.values(imageModules)
+  .map((module) => module.default)
+  .find((img) => img && img.toLowerCase().includes('logo')) || '';
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -43,6 +46,14 @@ const skillGroups = [
   {
     title: 'AWS & Cloud',
     items: ['S3', 'EC2', 'IAM', 'Rekognition', 'Transcribe', 'Lex', 'Translate']
+  },
+  {
+    title: 'Generative AI & NLP',
+    items: ['LLMs', 'RAG', 'Prompt Engineering', 'Multimodal AI', 'Document Analysis']
+  },
+  {
+    title: 'Frontend & Interactive UI',
+    items: ['React', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Streamlit', 'Responsive Design']
   }
 ];
 
@@ -120,8 +131,12 @@ export default function App() {
       </button>
       <header className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-950/95 backdrop-blur-md' : 'border-slate-200/70 bg-white/95 backdrop-blur-md'}`}>
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-          <a href="#home" className={`text-lg font-semibold tracking-tight transition-colors duration-300 ${isDark ? 'text-white' : 'text-slate-950'}`}>
-            Kesava<span className="text-sky-600">.</span>
+          <a href="#home" className="transition duration-300 hover:opacity-90">
+            <img
+              src={logoImage}
+              alt="Kesava Kantipudi logo"
+              className="h-10 w-auto max-w-[10rem] object-contain"
+            />
           </a>
 
           <nav className="hidden items-center gap-6 md:flex">
@@ -259,13 +274,13 @@ export default function App() {
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-600">About Me</p>
               <h2 className={`mt-4 text-3xl font-semibold tracking-tight transition-colors duration-300 sm:text-4xl ${isDark ? 'text-white' : 'text-slate-950'}`}>
-                I create polished applications for real business and research problems.
+                I build AI-driven applications that turn data and ideas into practical solutions.
               </h2>
               <p className={`mt-6 max-w-2xl text-base leading-8 transition-colors duration-300 sm:text-lg ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                I'm Kesava Sai Veerendra Kantipudi, an AI/ML engineering student currently pursuing B.Tech in Artificial Intelligence and Machine Learning at Aditya College of Engineering. I enjoy building intelligent systems, data dashboards, and user-friendly web applications that solve real-world challenges.
+                I'm Kesava Sai Veerendra Kantipudi, an AI/ML engineering student currently pursuing B.Tech in Artificial Intelligence and Machine Learning at Aditya College of Engineering. I focus on building intelligent systems, machine learning models, and AI-powered web experiences that solve real-world challenges.
               </p>
               <p className={`mt-4 max-w-2xl text-base leading-8 transition-colors duration-300 sm:text-lg ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                My experience spans Python, Java, SQL, web development, Power BI, and AWS deployment. I enjoy learning new tools, solving problems creatively, and delivering projects that make data easier to understand.
+                My experience spans Python, Java, SQL, NLP, RAG, web development, Power BI, and AWS deployment. I enjoy learning new AI tools, solving problems creatively, and delivering projects that make data and automation more useful.
               </p>
             </div>
 
@@ -418,7 +433,7 @@ export default function App() {
 
               <div className={`rounded-[1.5rem] border p-8 backdrop-blur-sm transition-colors duration-300 ${isDark ? 'border-white/10 bg-white/5' : 'border-white/20 bg-white/10'}`}>
                 <h3 className={`text-xl font-semibold transition-colors duration-300 ${isDark ? 'text-white' : 'text-white'}`}>Send Me a Message</h3>
-                <form action="https://formspree.io/f/mdkzdov" method="POST" className="mt-6 space-y-4">
+                <form action="https://formspree.io/f/mdkzdovq" method="POST" className="mt-6 space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-slate-200 mb-2">
                       Your Name
@@ -465,9 +480,6 @@ export default function App() {
                     Send Message
                   </button>
                 </form>
-                <p className="mt-4 text-xs text-slate-400">
-                  Powered by <a href="https://formspree.io" target="_blank" rel="noreferrer" className="text-sky-400 hover:underline">Formspree</a>
-                </p>
               </div>
             </div>
           </div>
@@ -476,8 +488,20 @@ export default function App() {
 
       <footer className={`border-t py-6 transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-950' : 'border-slate-200/70 bg-white'}`}>
         <div className={`mx-auto flex max-w-6xl items-center justify-between px-4 text-sm transition-colors duration-300 sm:px-6 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-          <p>© {new Date().getFullYear()} Kesava Kantipudi. Built with React, Vite, Tailwind CSS, and Framer Motion.</p>
-          <a href="#home" className={`transition hover:text-sky-500 ${isDark ? 'text-sky-400 hover:text-sky-300' : 'text-sky-600 hover:text-sky-800'}`}>Back to top</a>
+          <p>© {new Date().getFullYear()} Kesava Kantipudi</p>
+          <div className="flex items-center gap-2">
+            <a href="#home" className={`transition hover:text-sky-500 ${isDark ? 'text-sky-400 hover:text-sky-300' : 'text-sky-600 hover:text-sky-800'}`}>
+              Back to top
+            </a>
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              aria-label="Scroll to top"
+              className={`inline-flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 hover:-translate-y-0.5 hover:text-sky-500 ${isDark ? 'border-slate-700 bg-slate-900 text-sky-400 hover:border-sky-400 hover:bg-slate-800 hover:text-sky-300' : 'border-slate-200 bg-slate-50 text-sky-600 hover:border-sky-300 hover:bg-sky-50 hover:text-sky-800'}`}
+            >
+              <i className="fas fa-arrow-up text-xs" />
+            </button>
+          </div>
         </div>
       </footer>
     </div>
