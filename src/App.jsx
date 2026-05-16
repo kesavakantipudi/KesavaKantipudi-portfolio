@@ -162,7 +162,7 @@ export default function App() {
                 AI / ML Developer
               </span>
               <h1 className="mt-8 text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Hi, I’m <span className="text-cyan-200">Kesava Kantipudi</span>
+                Hi, I'm <span className="text-cyan-200">Kesava Kantipudi</span>
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-8 text-slate-200 sm:text-xl">
                 I build modern, responsive web experiences and intelligent AI solutions using React, Python, machine learning, and cloud automation.
@@ -217,7 +217,7 @@ export default function App() {
                 I create polished applications for real business and research problems.
               </h2>
               <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-                I’m Kesava Sai Veerendra Kantipudi, an AI/ML engineering student currently pursuing B.Tech in Artificial Intelligence and Machine Learning at Aditya College of Engineering. I enjoy building intelligent systems, data dashboards, and user-friendly web applications that solve real-world challenges.
+                I'm Kesava Sai Veerendra Kantipudi, an AI/ML engineering student currently pursuing B.Tech in Artificial Intelligence and Machine Learning at Aditya College of Engineering. I enjoy building intelligent systems, data dashboards, and user-friendly web applications that solve real-world challenges.
               </p>
               <p className="mt-4 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
                 My experience spans Python, Java, SQL, web development, Power BI, and AWS deployment. I enjoy learning new tools, solving problems creatively, and delivering projects that make data easier to understand.
@@ -342,26 +342,25 @@ export default function App() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8"
         >
-          <div className="rounded-[2rem] border border-slate-200 bg-slate-950 p-10 text-white shadow-soft">
-            <div className="grid gap-10 md:grid-cols-[1.3fr_0.9fr] md:items-center">
-              <div>
+          <div className="rounded-[2rem] border border-slate-200 bg-slate-950 p-8 shadow-soft sm:p-10">
+            <div className="grid gap-12 md:grid-cols-2">
+              <div className="text-white">
                 <p className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300">Contact</p>
-                <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Let’s build something great together.</h2>
-                <p className="mt-4 max-w-xl text-base leading-7 text-slate-300">
-                  I’m available for internships, freelance projects, and collaborations in web development, AI, and data automation. Reach out if you'd like to work together.
+                <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Let's build something amazing together.</h2>
+                <p className="mt-6 max-w-xl text-base leading-7 text-slate-300">
+                  I'm available for internships, freelance projects, and collaborations. Whether it's AI, data analytics, or frontend development—let's connect and create something impactful.
                 </p>
-              </div>
-              <div className="space-y-4 rounded-[1.5rem] bg-slate-900/80 p-6">
-                <a href="mailto:kantipudikesavasaiveerendra@gmail.com" className="block rounded-3xl border border-slate-700 bg-white/5 px-5 py-4 text-sm font-medium text-white transition hover:border-cyan-400 hover:bg-cyan-500/10">
-                  Email: kantipudikesavasaiveerendra@gmail.com
-                </a>
-                <a href="https://github.com/kesavakantipudi" target="_blank" rel="noreferrer" className="block rounded-3xl border border-slate-700 bg-white/5 px-5 py-4 text-sm font-medium text-white transition hover:border-cyan-400 hover:bg-cyan-500/10">
-                  GitHub: github.com/kesavakantipudi
-                </a>
-                <a href="https://www.linkedin.com/in/kesava-kantipudi-00550a291/" target="_blank" rel="noreferrer" className="block rounded-3xl border border-slate-700 bg-white/5 px-5 py-4 text-sm font-medium text-white transition hover:border-cyan-400 hover:bg-cyan-500/10">
-                  LinkedIn: kesava-kantipudi
-                </a>
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-10 space-y-4">
+                  <a href="mailto:kantipudikesavasaiveerendra@gmail.com" className="flex items-center gap-3 text-slate-200 transition hover:text-white">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10">✉</span>
+                    kantipudikesavasaiveerendra@gmail.com
+                  </a>
+                  <p className="flex items-center gap-3 text-slate-200">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10">📍</span>
+                    Rajahmundry, Andhra Pradesh, India
+                  </p>
+                </div>
+                <div className="mt-8 flex gap-3">
                   {socialLinks.map((social) => (
                     <a
                       key={social.label}
@@ -369,12 +368,66 @@ export default function App() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={social.label}
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 bg-white/5 text-white transition hover:border-cyan-400 hover:bg-cyan-500/10"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-sky-600"
                     >
                       <i className={`fab ${social.icon} text-sm`} />
                     </a>
                   ))}
                 </div>
+              </div>
+
+              <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
+                <h3 className="text-xl font-semibold text-white">Send Me a Message</h3>
+                <form action="https://formspree.io/f/xyzyqwer" method="POST" className="mt-6 space-y-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-slate-200 mb-2">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="Kesava"
+                      required
+                      className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-slate-400 transition focus:bg-white/10 focus:border-sky-400 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-slate-200 mb-2">
+                      Your Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="you@example.com"
+                      required
+                      className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-slate-400 transition focus:bg-white/10 focus:border-sky-400 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-slate-200 mb-2">
+                      Your Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      placeholder="Tell me about your project or opportunity..."
+                      rows={4}
+                      required
+                      className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-slate-400 transition focus:bg-white/10 focus:border-sky-400 focus:outline-none resize-none"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full rounded-lg bg-sky-600 px-6 py-3 font-semibold text-white transition hover:bg-sky-700 active:scale-95"
+                  >
+                    Send Message
+                  </button>
+                </form>
+                <p className="mt-4 text-xs text-slate-400">
+                  Powered by <a href="https://formspree.io" target="_blank" rel="noreferrer" className="text-sky-400 hover:underline">Formspree</a>
+                </p>
               </div>
             </div>
           </div>
