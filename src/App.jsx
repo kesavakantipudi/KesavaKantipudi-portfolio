@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import profilePhoto from '../Images/image.png';
+import img1 from '../Images/23MH1A4224 (1).png';
+import img2 from '../Images/image.png';
+import img3 from '../Images/MY DR IMG.png';
 
 const resumeUrl = new URL('../KesavaSaiVeerendra.pdf', import.meta.url).href;
+
+const carouselImages = [img1, img2, img3];
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -82,8 +87,16 @@ const projects = [
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { scrollY } = useScroll();
   const parallaxY = useTransform(scrollY, [0, 800], [0, 140]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % carouselImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
@@ -212,10 +225,22 @@ export default function App() {
               <div className="absolute inset-x-0 top-0 h-full rounded-[2rem] bg-white/10 blur-3xl" />
               <div className="relative overflow-hidden rounded-[2rem] border-2 border-white/20 bg-white/10 p-2 shadow-lg">
                 <img
-                  src={profilePhoto}
+                  src={carouselImages[currentImageIndex]}
                   alt="Kesava Kantipudi"
-                  className="h-96 w-full rounded-[1.75rem] object-contain sm:h-[28rem]"
+                  className="h-96 w-full rounded-[1.75rem] object-contain sm:h-[28rem] transition-all duration-500"
                 />
+              </div>
+              <div className="mt-4 flex justify-center gap-2">
+                {carouselImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`h-2.5 rounded-full transition-all duration-300 ${
+                      index === currentImageIndex ? 'w-8 bg-white' : 'w-2.5 bg-white/30 hover:bg-white/50'
+                    }`}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
               </div>
             </motion.div>
           </div>
