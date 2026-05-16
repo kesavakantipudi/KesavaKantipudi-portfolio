@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import profilePhoto from '../Images/23MH1A4224 (1).png';
 
 const resumeUrl = new URL('../KesavaSaiVeerendra.pdf', import.meta.url).href;
 
@@ -11,39 +12,69 @@ const navLinks = [
   { label: 'Contact', href: '#contact' }
 ];
 
+const socialLinks = [
+  { icon: 'fa-facebook-f', url: 'https://www.facebook.com/profile.php?id=100084996735613', label: 'Facebook' },
+  { icon: 'fa-twitter', url: 'https://x.com/Kesava_choudary', label: 'Twitter' },
+  { icon: 'fa-instagram', url: 'https://www.instagram.com/kesava_kantipudi/', label: 'Instagram' },
+  { icon: 'fa-linkedin', url: 'https://www.linkedin.com/in/kesava-kantipudi-00550a291/', label: 'LinkedIn' },
+  { icon: 'fa-github', url: 'https://github.com/kesavakantipudi/', label: 'GitHub' }
+];
+
 const skillGroups = [
   {
-    title: 'Languages & Frameworks',
-    items: ['Python', 'Java', 'HTML', 'CSS', 'React', 'Tailwind']
+    title: 'Programming & Databases',
+    items: ['Python', 'Java', 'SQL', 'C', 'HTML', 'CSS', 'JavaScript']
+  },
+  {
+    title: 'Data Analytics & Tools',
+    items: ['Excel', 'Power BI', 'SharePoint', 'Power Automate']
   },
   {
     title: 'Machine Learning',
-    items: ['TensorFlow', 'PyTorch', 'NLP', 'Computer Vision', 'Data Analysis']
+    items: ['TensorFlow', 'PyTorch', 'NLP', 'Sentiment Analysis', 'Computer Vision']
   },
   {
-    title: 'Tools & Cloud',
-    items: ['Power BI', 'Power Automate', 'AWS S3', 'EC2', 'Git']
+    title: 'AWS & Cloud',
+    items: ['S3', 'EC2', 'IAM', 'Rekognition', 'Transcribe', 'Lex', 'Translate']
   }
 ];
 
 const projects = [
   {
-    title: 'Multi-Task Learning Dashboard',
-    description: 'Built a multi-task learning research pipeline with TensorFlow and a Streamlit interface for training insights, task balancing, and gradient surgery monitoring.',
-    tech: ['TensorFlow', 'Streamlit', 'Python'],
+    title: 'Multi-Task Learning with Gradient Surgery',
+    description: 'TensorFlow multi-task learning with PCGrad training. Shared backbone with gradient surgery to reduce task conflict. Streamlit dashboard for monitoring metrics.',
+    tech: ['TensorFlow', 'Streamlit', 'Deep Learning'],
     repo: 'https://github.com/kesavakantipudi/Multi-Task-Learning-Model-with-Gradient-Surgery-using-TensorFlow-and-Streamlit'
   },
   {
     title: 'Speech-to-Intent Pipeline',
-    description: 'Designed a real-time speech understanding system that converts audio input into structured intent using modern voice and natural language models.',
+    description: 'Production-ready real-time speech understanding system that converts audio input into structured intents using modern voice and NLP models.',
     tech: ['Python', 'NLP', 'AWS'],
     repo: 'https://github.com/kesavakantipudi/Production-Ready-Real-Time-Speech-to-Intent-Pipeline'
   },
   {
     title: 'Explainable Recommendation System',
-    description: 'Created a recommendation engine with SHAP explanations to make feature contributions transparent for every prediction.',
-    tech: ['Python', 'Machine Learning', 'Explainability'],
+    description: 'Recommendation engine with SHAP-based feature attribution to make model predictions transparent and interpretable for every user.',
+    tech: ['Python', 'Machine Learning', 'SHAP'],
     repo: 'https://github.com/kesavakantipudi/Explainable-Recommendation-System-with-SHAP-Based-Feature-Attribution'
+  },
+  {
+    title: 'Multimodal RAG System',
+    description: 'Retrieval-Augmented Generation system that processes both documents and images, combining text and visual understanding for comprehensive analysis.',
+    tech: ['Python', 'RAG', 'LLMs'],
+    repo: 'https://github.com/kesavakantipudi/Multimodal-RAG-System-for-Document-and-Image-Analysis'
+  },
+  {
+    title: 'Sentiment Analysis Platform',
+    description: 'End-to-end sentiment analysis platform with real-time processing, visualization, and batch analysis capabilities for social media and review data.',
+    tech: ['Python', 'NLP', 'Web Dashboard'],
+    repo: 'https://github.com/kesavakantipudi/Sentiment_Analysis_Platform'
+  },
+  {
+    title: 'Variational Autoencoder Explorer',
+    description: 'PyTorch-based VAE with controllable latent space explorer. Interactive dashboard for understanding and generating data with controllable parameters.',
+    tech: ['PyTorch', 'VAE', 'Visualization'],
+    repo: 'https://github.com/kesavakantipudi/Variational-Autoencoder-with-a-Controllable-Latent-Space-Explorer-using-PyTorch'
   }
 ];
 
@@ -160,12 +191,12 @@ export default function App() {
               className="relative mx-auto w-full max-w-md"
             >
               <div className="absolute inset-x-0 top-0 h-full rounded-[2rem] bg-white/10 blur-3xl" />
-              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-8 shadow-soft">
-                <div className="flex h-96 items-center justify-center rounded-[1.5rem] bg-slate-950/10">
-                  <div className="flex h-64 w-64 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 via-cyan-400 to-slate-900 text-6xl font-black uppercase tracking-[0.2em] text-white shadow-xl shadow-slate-950/20">
-                    KK
-                  </div>
-                </div>
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-2 shadow-soft">
+                <img
+                  src={profilePhoto}
+                  alt="Kesava Kantipudi"
+                  className="h-96 w-full rounded-[1.5rem] object-cover sm:h-[28rem]"
+                />
               </div>
             </motion.div>
           </div>
@@ -194,18 +225,27 @@ export default function App() {
             </div>
 
             <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-soft">
-              <div className="rounded-[1.75rem] bg-gradient-to-br from-sky-500 to-cyan-300 p-8 text-center text-white shadow-lg shadow-sky-500/20">
-                <div className="mx-auto mb-5 flex h-28 w-28 items-center justify-center rounded-full bg-white/10 text-4xl font-black uppercase tracking-[0.2em]">
-                  KK
-                </div>
-                <p className="text-sm leading-7">
-                  I blend AI research, frontend design, and cloud automation into polished, user-friendly applications.
-                </p>
+              <div className="overflow-hidden rounded-[1.75rem] bg-slate-100">
+                <img src={profilePhoto} alt="Kesava in casual portrait" className="h-72 w-full object-cover" />
               </div>
               <div className="mt-6 space-y-4 text-slate-700">
                 <p className="rounded-3xl bg-slate-50 px-4 py-3 text-sm font-medium">Location: Rajahmundry, Andhra Pradesh</p>
-                <p className="rounded-3xl bg-slate-50 px-4 py-3 text-sm font-medium">Currently focused on AI, NLP, and frontend applications</p>
-                <p className="rounded-3xl bg-slate-50 px-4 py-3 text-sm font-medium">Passionate about clean code, responsive design, and performance</p>
+                <p className="rounded-3xl bg-slate-50 px-4 py-3 text-sm font-medium">Currently focused on AI, ML, NLP, and frontend development</p>
+                <p className="rounded-3xl bg-slate-50 px-4 py-3 text-sm font-medium">Passionate about clean code, responsive design, and continuous learning</p>
+              </div>
+              <div className="mt-6 flex justify-center gap-3">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={social.label}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-700 transition hover:bg-sky-600 hover:text-white hover:border-sky-600"
+                  >
+                    <i className={`fab ${social.icon}`} />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -253,13 +293,13 @@ export default function App() {
         <section id="projects" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="mb-12">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-600">Projects</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Selected work with public repos.</h2>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Featured Projects & Research</h2>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600">
-              Each project includes a GitHub link and a short summary of the technical stack and solution.
+              A collection of my recent work spanning machine learning, NLP, data analysis, and web development. All projects are available on GitHub.
             </p>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
             {projects.map((project, index) => (
               <motion.article
                 key={project.title}
@@ -267,12 +307,12 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.7, delay: index * 0.1 }}
-                className="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-soft"
+                className="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-soft transition hover:shadow-lg hover:border-sky-300"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-sky-100 text-sky-700">
-                  <span className="text-xl">{index + 1}</span>
+                <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-sky-100 text-sky-700 text-xl font-bold">
+                  {index + 1}
                 </div>
-                <h3 className="mt-6 text-xl font-semibold text-slate-950">{project.title}</h3>
+                <h3 className="mt-6 text-lg font-semibold text-slate-950">{project.title}</h3>
                 <p className="mt-4 text-sm leading-7 text-slate-600">{project.description}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {project.tech.map((tech) => (
@@ -321,6 +361,20 @@ export default function App() {
                 <a href="https://www.linkedin.com/in/kesava-kantipudi-00550a291/" target="_blank" rel="noreferrer" className="block rounded-3xl border border-slate-700 bg-white/5 px-5 py-4 text-sm font-medium text-white transition hover:border-cyan-400 hover:bg-cyan-500/10">
                   LinkedIn: kesava-kantipudi
                 </a>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={social.label}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 bg-white/5 text-white transition hover:border-cyan-400 hover:bg-cyan-500/10"
+                    >
+                      <i className={`fab ${social.icon} text-sm`} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
