@@ -195,7 +195,7 @@ export default function App() {
                 <img
                   src={profilePhoto}
                   alt="Kesava Kantipudi"
-                  className="h-96 w-full rounded-[1.5rem] object-contain sm:h-[28rem] rounded-[2rem]"
+                  className="h-96 w-full rounded-[1.75rem] object-contain sm:h-[28rem]"
                 />
               </div>
             </motion.div>
@@ -226,7 +226,7 @@ export default function App() {
 
             <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-soft">
               <div className="overflow-hidden rounded-[1.75rem] bg-slate-100">
-                <img src={profilePhoto} alt="Kesava in casual portrait" className="h-full w-full object-contain rounded-[1.75rem]" />
+                <img src={profilePhoto} alt="Kesava in casual portrait" className="h-full w-full object-contain" />
               </div>
               <div className="mt-6 space-y-4 text-slate-700">
                 <p className="rounded-3xl bg-slate-50 px-4 py-3 text-sm font-medium">Location: Rajahmundry, Andhra Pradesh</p>
