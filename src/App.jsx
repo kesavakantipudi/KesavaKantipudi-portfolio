@@ -210,7 +210,7 @@ export default function App() {
               className="relative mx-auto w-full max-w-md"
             >
               <div className="absolute inset-x-0 top-0 h-full rounded-[2rem] bg-white/10 blur-3xl" />
-              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-2 shadow-soft">
+              <div className="relative overflow-hidden rounded-[2rem] border-2 border-white/20 bg-white/10 p-2 shadow-lg">
                 <img
                   src={profilePhoto}
                   alt="Kesava Kantipudi"
@@ -244,7 +244,7 @@ export default function App() {
             </div>
 
             <div className={`rounded-[2rem] border p-6 transition-colors duration-300 shadow-soft ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}>
-              <div className={`overflow-hidden rounded-[1.75rem] transition-colors duration-300 ${isDark ? 'bg-slate-800' : 'bg-slate-100'}`}>
+              <div className={`overflow-hidden rounded-[1.75rem] border-2 transition-colors duration-300 shadow-md ${isDark ? 'border-slate-700 bg-slate-800' : 'border-slate-300 bg-slate-100'}`}>
                 <img src={profilePhoto} alt="Kesava in casual portrait" className="h-full w-full object-contain" />
               </div>
               <div className="mt-6 flex justify-center gap-3">
