@@ -81,20 +81,38 @@ const projects = [
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const { scrollY } = useScroll();
   const parallaxY = useTransform(scrollY, [0, 800], [0, 140]);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/95 backdrop-blur-md">
+    <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
+      {/* Theme Toggle Button */}
+      <button
+        onClick={() => setIsDark(!isDark)}
+        className={`fixed right-8 top-1/2 -translate-y-1/2 z-40 flex items-center justify-center h-14 w-14 rounded-full transition-all duration-300 shadow-lg ${
+          isDark 
+            ? 'bg-sky-600 hover:bg-sky-700 text-white' 
+            : 'bg-slate-950 hover:bg-slate-800 text-yellow-300'
+        }`}
+        aria-label="Toggle dark mode"
+        title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      >
+        {isDark ? (
+          <i className="fas fa-sun text-xl" />
+        ) : (
+          <i className="fas fa-moon text-xl" />
+        )}
+      </button>
+      <header className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-950/95 backdrop-blur-md' : 'border-slate-200/70 bg-white/95 backdrop-blur-md'}`}>
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
-          <a href="#home" className="text-lg font-semibold tracking-tight text-slate-950">
+          <a href="#home" className={`text-lg font-semibold tracking-tight transition-colors duration-300 ${isDark ? 'text-white' : 'text-slate-950'}`}>
             Kesava<span className="text-sky-600">.</span>
           </a>
 
           <nav className="hidden items-center gap-6 md:flex">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-sm font-medium text-slate-700 transition hover:text-slate-950">
+              <a key={link.href} href={link.href} className={`text-sm font-medium transition hover:text-sky-600 ${isDark ? 'text-slate-300 hover:text-slate-100' : 'text-slate-700 hover:text-slate-950'}`}>
                 {link.label}
               </a>
             ))}
@@ -104,14 +122,14 @@ export default function App() {
             <a
               href={resumeUrl}
               download
-              className="hidden rounded-full border border-slate-200 bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 md:inline-flex"
+              className={`hidden rounded-full border px-4 py-2 text-sm font-semibold transition md:inline-flex ${isDark ? 'border-sky-600 bg-sky-600 text-white hover:bg-sky-700' : 'border-slate-200 bg-slate-950 text-white hover:bg-slate-800'}`}
             >
               Resume
             </a>
             <button
               type="button"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-900 shadow-sm transition hover:bg-slate-100 md:hidden"
+              className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition hover:bg-slate-100 md:hidden ${isDark ? 'border-slate-700 bg-slate-900 text-white hover:bg-slate-800' : 'border-slate-200 bg-white text-slate-900 hover:bg-slate-100'}`}
               onClick={() => setMenuOpen((current) => !current)}
             >
               <span className="sr-only">Toggle menu</span>
@@ -121,7 +139,7 @@ export default function App() {
         </div>
 
         <div
-          className={`md:hidden ${menuOpen ? 'opacity-100 visible' : 'pointer-events-none opacity-0 invisible'} absolute inset-x-0 top-full z-40 bg-white/95 px-4 pb-6 pt-4 shadow-2xl shadow-slate-900/10 transition-all duration-300`}
+          className={`md:hidden ${menuOpen ? 'opacity-100 visible' : 'pointer-events-none opacity-0 invisible'} absolute inset-x-0 top-full z-40 px-4 pb-6 pt-4 shadow-2xl shadow-slate-900/10 transition-all duration-300 ${isDark ? 'bg-slate-900/95' : 'bg-white/95'}`}
         >
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
@@ -129,7 +147,7 @@ export default function App() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="block rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-base font-medium text-slate-800 transition hover:bg-slate-100"
+                className={`block rounded-2xl border px-4 py-3 text-base font-medium transition hover:bg-opacity-80 ${isDark ? 'border-slate-700 bg-slate-800 text-slate-200' : 'border-slate-200 bg-slate-50 px-4 py-3 text-base font-medium text-slate-800'}`}
               >
                 {link.label}
               </a>
@@ -137,7 +155,7 @@ export default function App() {
             <a
               href={resumeUrl}
               download
-              className="block rounded-2xl bg-slate-950 px-4 py-3 text-base font-semibold text-white transition hover:bg-slate-800"
+              className={`block rounded-2xl px-4 py-3 text-base font-semibold transition ${isDark ? 'bg-sky-600 text-white hover:bg-sky-700' : 'bg-slate-950 text-white hover:bg-slate-800'}`}
             >
               Download Resume
             </a>
@@ -146,7 +164,7 @@ export default function App() {
       </header>
 
       <main className="pt-24">
-        <section id="home" className="relative overflow-hidden bg-gradient-to-br from-sky-700 via-cyan-600 to-slate-950 px-4 py-24 sm:px-6 lg:px-8">
+        <section id="home" className={`relative overflow-hidden px-4 py-24 transition-colors duration-300 sm:px-6 lg:px-8 ${isDark ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950' : 'bg-gradient-to-br from-sky-700 via-cyan-600 to-slate-950'}`}>
           <motion.div style={{ y: parallaxY }} className="pointer-events-none absolute inset-0 opacity-30">
             <div className="absolute -left-20 top-16 h-72 w-72 rounded-full bg-cyan-300/40 blur-3xl" />
             <div className="absolute right-0 top-32 h-80 w-80 rounded-full bg-sky-400/30 blur-3xl" />
