@@ -228,11 +228,6 @@ export default function App() {
               <div className="overflow-hidden rounded-[1.75rem] bg-slate-100">
                 <img src={profilePhoto} alt="Kesava in casual portrait" className="h-full w-full object-contain" />
               </div>
-              <div className="mt-6 space-y-4 text-slate-700">
-                <p className="rounded-3xl bg-slate-50 px-4 py-3 text-sm font-medium">Location: Rajahmundry, Andhra Pradesh</p>
-                <p className="rounded-3xl bg-slate-50 px-4 py-3 text-sm font-medium">Currently focused on AI, ML, NLP, and frontend development</p>
-                <p className="rounded-3xl bg-slate-50 px-4 py-3 text-sm font-medium">Passionate about clean code, responsive design, and continuous learning</p>
-              </div>
               <div className="mt-6 flex justify-center gap-3">
                 {socialLinks.map((social) => (
                   <a
