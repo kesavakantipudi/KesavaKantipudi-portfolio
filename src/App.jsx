@@ -14,7 +14,7 @@ const navLinks = [
 
 const socialLinks = [
   { icon: 'fa-facebook-f', url: 'https://www.facebook.com/profile.php?id=100084996735613', label: 'Facebook' },
-  { icon: 'fa-x-twitter', url: 'https://x.com/Kesava_choudary', label: 'Twitter' },
+  { icon: 'fa-twitter', url: 'https://x.com/Kesava_choudary', label: 'Twitter' },
   { icon: 'fa-instagram', url: 'https://www.instagram.com/tech_with_kesava/', label: 'Instagram' },
   { icon: 'fa-youtube', url: 'https://www.youtube.com/@Tech_With_Kesava', label: 'YouTube' },
   { icon: 'fa-linkedin', url: 'https://www.linkedin.com/in/kesava-kantipudi-00550a291/', label: 'LinkedIn' },
