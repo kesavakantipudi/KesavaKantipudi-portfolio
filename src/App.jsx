@@ -224,11 +224,11 @@ export default function App() {
               className="relative mx-auto w-full max-w-md"
             >
               <div className="absolute inset-x-0 top-0 h-full rounded-[2rem] bg-white/10 blur-3xl" />
-              <div className="relative overflow-hidden rounded-[2rem] border-2 border-white/20 bg-white/10 p-2 shadow-lg">
+              <div className="relative overflow-hidden rounded-[2rem] border-2 border-white/20 bg-white/10 p-2 shadow-lg aspect-square">
                 <img
                   src={carouselImages[currentImageIndex]}
                   alt="Kesava Kantipudi"
-                  className="h-96 w-full rounded-[1.75rem] object-contain sm:h-[28rem] transition-all duration-500"
+                  className="h-full w-full rounded-[1.75rem] object-cover transition-all duration-500"
                 />
               </div>
               <div className="mt-4 flex justify-center gap-2">
@@ -270,8 +270,8 @@ export default function App() {
             </div>
 
             <div className={`rounded-[2rem] border p-6 transition-colors duration-300 shadow-soft ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}>
-              <div className={`overflow-hidden rounded-[1.75rem] border-2 transition-colors duration-300 shadow-md ${isDark ? 'border-slate-700 bg-slate-800' : 'border-slate-300 bg-slate-100'}`}>
-                <img src={carouselImages[0] || ''} alt="Kesava in casual portrait" className="h-full w-full object-contain" />
+              <div className={`overflow-hidden rounded-[1.75rem] border-2 transition-colors duration-300 shadow-md aspect-square ${isDark ? 'border-slate-700 bg-slate-800' : 'border-slate-300 bg-slate-100'}`}>
+                <img src={carouselImages[0] || ''} alt="Kesava in casual portrait" className="h-full w-full object-cover" />
               </div>
               <div className="mt-6 flex justify-center gap-3">
                 {socialLinks.map((social) => (
