@@ -3,8 +3,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const resumeUrl = new URL('../KesavaSaiVeerendra.pdf', import.meta.url).href;
 
-// Dynamically import all images from the Images folder
-const imageModules = import.meta.glob('../Images/*.png', { eager: true });
+// Dynamically import all image files from the Images folder
+const imageModules = import.meta.glob('../Images/*.{png,jpg,jpeg}', { eager: true });
 const carouselImages = Object.values(imageModules)
   .map((module) => module.default)
   .filter((img) => img && !img.toLowerCase().includes('logo')) // Exclude logo from carousel
