@@ -227,24 +227,24 @@ export default function App() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8"
+          className={`mx-auto max-w-6xl px-4 py-20 transition-colors duration-300 sm:px-6 lg:px-8 ${isDark ? 'bg-slate-950' : 'bg-white'}`}
         >
           <div className="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-center">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-600">About Me</p>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+              <h2 className={`mt-4 text-3xl font-semibold tracking-tight transition-colors duration-300 sm:text-4xl ${isDark ? 'text-white' : 'text-slate-950'}`}>
                 I create polished applications for real business and research problems.
               </h2>
-              <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+              <p className={`mt-6 max-w-2xl text-base leading-8 transition-colors duration-300 sm:text-lg ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 I'm Kesava Sai Veerendra Kantipudi, an AI/ML engineering student currently pursuing B.Tech in Artificial Intelligence and Machine Learning at Aditya College of Engineering. I enjoy building intelligent systems, data dashboards, and user-friendly web applications that solve real-world challenges.
               </p>
-              <p className="mt-4 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+              <p className={`mt-4 max-w-2xl text-base leading-8 transition-colors duration-300 sm:text-lg ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                 My experience spans Python, Java, SQL, web development, Power BI, and AWS deployment. I enjoy learning new tools, solving problems creatively, and delivering projects that make data easier to understand.
               </p>
             </div>
 
-            <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-soft">
-              <div className="overflow-hidden rounded-[1.75rem] bg-slate-100">
+            <div className={`rounded-[2rem] border p-6 transition-colors duration-300 shadow-soft ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}>
+              <div className={`overflow-hidden rounded-[1.75rem] transition-colors duration-300 ${isDark ? 'bg-slate-800' : 'bg-slate-100'}`}>
                 <img src={profilePhoto} alt="Kesava in casual portrait" className="h-full w-full object-contain" />
               </div>
               <div className="mt-6 flex justify-center gap-3">
@@ -255,7 +255,7 @@ export default function App() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={social.label}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-700 transition hover:bg-sky-600 hover:text-white hover:border-sky-600"
+                    className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition hover:bg-sky-600 hover:text-white hover:border-sky-600 ${isDark ? 'border-slate-700 bg-slate-800 text-slate-300' : 'border-slate-200 bg-slate-50 text-slate-700'}`}
                   >
                     <i className={`fab ${social.icon}`} />
                   </a>
@@ -276,9 +276,9 @@ export default function App() {
           <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-600">Skills</p>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Technologies I work with daily.</h2>
+              <h2 className={`mt-4 text-3xl font-semibold tracking-tight transition-colors duration-300 sm:text-4xl ${isDark ? 'text-white' : 'text-slate-950'}`}>Technologies I work with daily.</h2>
             </div>
-            <p className="max-w-xl text-sm leading-7 text-slate-600">
+            <p className={`max-w-xl text-sm leading-7 transition-colors duration-300 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
               I combine software engineering, AI modeling, and dashboard design to build reliable products with polished interfaces.
             </p>
           </div>
@@ -288,10 +288,10 @@ export default function App() {
               <motion.div
                 key={group.title}
                 whileHover={{ y: -4 }}
-                className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-soft"
+                className={`rounded-[2rem] border p-6 transition-colors duration-300 shadow-soft ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}
               >
-                <h3 className="text-xl font-semibold text-slate-950">{group.title}</h3>
-                <ul className="mt-5 space-y-3 text-slate-600">
+                <h3 className={`text-xl font-semibold transition-colors duration-300 ${isDark ? 'text-white' : 'text-slate-950'}`}>{group.title}</h3>
+                <ul className={`mt-5 space-y-3 transition-colors duration-300 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
                   {group.items.map((item) => (
                     <li key={item} className="flex items-center gap-3 text-sm">
                       <span className="inline-flex h-2.5 w-2.5 rounded-full bg-sky-500" />
@@ -304,11 +304,11 @@ export default function App() {
           </div>
         </motion.section>
 
-        <section id="projects" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+        <section id="projects" className={`mx-auto max-w-6xl px-4 py-20 transition-colors duration-300 sm:px-6 lg:px-8 ${isDark ? 'bg-slate-950' : 'bg-white'}`}>
           <div className="mb-12">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-sky-600">Projects</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Featured Projects & Research</h2>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600">
+            <h2 className={`mt-4 text-3xl font-semibold tracking-tight transition-colors duration-300 sm:text-4xl ${isDark ? 'text-white' : 'text-slate-950'}`}>Featured Projects & Research</h2>
+            <p className={`mt-4 max-w-2xl text-sm leading-7 transition-colors duration-300 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
               A collection of my recent work spanning machine learning, NLP, data analysis, and web development. All projects are available on GitHub.
             </p>
           </div>
@@ -321,16 +321,16 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.7, delay: index * 0.1 }}
-                className="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-soft transition hover:shadow-lg hover:border-sky-300"
+                className={`group rounded-[2rem] border p-6 transition hover:shadow-lg hover:border-sky-300 shadow-soft ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-sky-100 text-sky-700 text-xl font-bold">
+                <div className={`flex h-12 w-12 items-center justify-center rounded-3xl text-xl font-bold transition-colors duration-300 ${isDark ? 'bg-sky-900 text-sky-300' : 'bg-sky-100 text-sky-700'}`}>
                   {index + 1}
                 </div>
-                <h3 className="mt-6 text-lg font-semibold text-slate-950">{project.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-slate-600">{project.description}</p>
+                <h3 className={`mt-6 text-lg font-semibold transition-colors duration-300 ${isDark ? 'text-white' : 'text-slate-950'}`}>{project.title}</h3>
+                <p className={`mt-4 text-sm leading-7 transition-colors duration-300 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{project.description}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {project.tech.map((tech) => (
-                    <span key={tech} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
+                    <span key={tech} className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors duration-300 ${isDark ? 'border-slate-700 bg-slate-800 text-slate-300' : 'border-slate-200 bg-slate-50 text-slate-700'}`}>
                       {tech}
                     </span>
                   ))}
@@ -339,7 +339,7 @@ export default function App() {
                   href={project.repo}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-sky-700 transition hover:text-sky-900"
+                  className={`mt-6 inline-flex items-center gap-2 text-sm font-semibold transition ${isDark ? 'text-sky-400 hover:text-sky-300' : 'text-sky-700 hover:text-sky-900'}`}
                 >
                   View Repository ↗
                 </a>
@@ -354,22 +354,22 @@ export default function App() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8"
+          className={`mx-auto max-w-6xl px-4 py-20 transition-colors duration-300 sm:px-6 lg:px-8`}
         >
-          <div className="rounded-[2rem] border border-slate-200 bg-slate-950 p-8 shadow-soft sm:p-10">
+          <div className={`rounded-[2rem] border p-8 shadow-soft transition-colors duration-300 sm:p-10 ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-slate-950'}`}>
             <div className="grid gap-12 md:grid-cols-2">
-              <div className="text-white">
+              <div className={`transition-colors duration-300 ${isDark ? 'text-slate-100' : 'text-white'}`}>
                 <p className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300">Contact</p>
-                <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Let's build something amazing together.</h2>
-                <p className="mt-6 max-w-xl text-base leading-7 text-slate-300">
+                <h2 className={`mt-4 text-3xl font-semibold tracking-tight transition-colors duration-300 sm:text-4xl ${isDark ? 'text-white' : 'text-white'}`}>Let's build something amazing together.</h2>
+                <p className={`mt-6 max-w-xl text-base leading-7 transition-colors duration-300 ${isDark ? 'text-slate-400' : 'text-slate-300'}`}>
                   I'm available for internships, freelance projects, and collaborations. Whether it's AI, data analytics, or frontend development—let's connect and create something impactful.
                 </p>
                 <div className="mt-10 space-y-4">
-                  <a href="mailto:kantipudikesavasaiveerendra@gmail.com" className="flex items-center gap-3 text-slate-200 transition hover:text-white">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10">✉</span>
+                  <a href="mailto:kantipudikesavasaiveerendra@gmail.com" className={`flex items-center gap-3 transition hover:text-white ${isDark ? 'text-slate-300' : 'text-slate-200'}`}>
+                    <span className={`inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 ${isDark ? 'bg-white/10' : 'bg-white/10'}`}>✉</span>
                     kantipudikesavasaiveerendra@gmail.com
                   </a>
-                  <p className="flex items-center gap-3 text-slate-200">
+                  <p className={`flex items-center gap-3 transition-colors duration-300 ${isDark ? 'text-slate-300' : 'text-slate-200'}`}>
                     <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10">📍</span>
                     Rajahmundry, Andhra Pradesh, India
                   </p>
@@ -382,7 +382,7 @@ export default function App() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={social.label}
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-sky-600"
+                      className={`inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-sky-600 ${isDark ? 'bg-white/10' : 'bg-white/10'}`}
                     >
                       <i className={`fab ${social.icon} text-sm`} />
                     </a>
@@ -390,8 +390,8 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
-                <h3 className="text-xl font-semibold text-white">Send Me a Message</h3>
+              <div className={`rounded-[1.5rem] border p-8 backdrop-blur-sm transition-colors duration-300 ${isDark ? 'border-white/10 bg-white/5' : 'border-white/20 bg-white/10'}`}>
+                <h3 className={`text-xl font-semibold transition-colors duration-300 ${isDark ? 'text-white' : 'text-white'}`}>Send Me a Message</h3>
                 <form action="https://formspree.io/f/mdkzdov" method="POST" className="mt-6 space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-slate-200 mb-2">
@@ -448,10 +448,10 @@ export default function App() {
         </motion.section>
       </main>
 
-      <footer className="border-t border-slate-200/70 bg-white py-6">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 text-sm text-slate-500 sm:px-6">
+      <footer className={`border-t py-6 transition-colors duration-300 ${isDark ? 'border-slate-800 bg-slate-950' : 'border-slate-200/70 bg-white'}`}>
+        <div className={`mx-auto flex max-w-6xl items-center justify-between px-4 text-sm transition-colors duration-300 sm:px-6 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
           <p>© {new Date().getFullYear()} Kesava Kantipudi. Built with React, Vite, Tailwind CSS, and Framer Motion.</p>
-          <a href="#home" className="text-sky-600 hover:text-sky-800">Back to top</a>
+          <a href="#home" className={`transition hover:text-sky-500 ${isDark ? 'text-sky-400 hover:text-sky-300' : 'text-sky-600 hover:text-sky-800'}`}>Back to top</a>
         </div>
       </footer>
     </div>
