@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import profilePhoto from '../Images/image.png';
-import img1 from '../Images/23MH1A4224 (1).png';
-import img2 from '../Images/image.png';
-import img3 from '../Images/MY DR IMG.png';
 
 const resumeUrl = new URL('../KesavaSaiVeerendra.pdf', import.meta.url).href;
 
-const carouselImages = [img1, img2, img3];
+// Dynamically import all images from the Images folder
+const imageModules = import.meta.glob('../Images/*.png', { eager: true });
+const carouselImages = Object.values(imageModules)
+  .map((module) => module.default)
+  .filter((img) => img && !img.toLowerCase().includes('logo')) // Exclude logo from carousel
+  .sort(); // Sort for consistent ordering
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -270,7 +271,7 @@ export default function App() {
 
             <div className={`rounded-[2rem] border p-6 transition-colors duration-300 shadow-soft ${isDark ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'}`}>
               <div className={`overflow-hidden rounded-[1.75rem] border-2 transition-colors duration-300 shadow-md ${isDark ? 'border-slate-700 bg-slate-800' : 'border-slate-300 bg-slate-100'}`}>
-                <img src={profilePhoto} alt="Kesava in casual portrait" className="h-full w-full object-contain" />
+                <img src={carouselImages[0] || ''} alt="Kesava in casual portrait" className="h-full w-full object-contain" />
               </div>
               <div className="mt-6 flex justify-center gap-3">
                 {socialLinks.map((social) => (
