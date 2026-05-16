@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import profilePhoto from '../Images/23MH1A4224 (1).png';
+import profilePhoto from '../Images/image.png';
 
 const resumeUrl = new URL('../KesavaSaiVeerendra.pdf', import.meta.url).href;
 
@@ -195,7 +195,7 @@ export default function App() {
                 <img
                   src={profilePhoto}
                   alt="Kesava Kantipudi"
-                  className="h-96 w-full rounded-[1.5rem] object-contain sm:h-[28rem]"
+                  className="h-96 w-full rounded-[1.5rem] object-contain sm:h-[28rem] rounded-[2rem]"
                 />
               </div>
             </motion.div>
@@ -226,7 +226,7 @@ export default function App() {
 
             <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-soft">
               <div className="overflow-hidden rounded-[1.75rem] bg-slate-100">
-                <img src={profilePhoto} alt="Kesava in casual portrait" className="h-full w-full object-contain" />
+                <img src={profilePhoto} alt="Kesava in casual portrait" className="h-full w-full object-contain rounded-[1.75rem]" />
               </div>
               <div className="mt-6 space-y-4 text-slate-700">
                 <p className="rounded-3xl bg-slate-50 px-4 py-3 text-sm font-medium">Location: Rajahmundry, Andhra Pradesh</p>
@@ -378,7 +378,7 @@ export default function App() {
 
               <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
                 <h3 className="text-xl font-semibold text-white">Send Me a Message</h3>
-                <form action="https://formspree.io/f/xyzyqwer" method="POST" className="mt-6 space-y-4">
+                <form action="https://formspree.io/f/mdkzdov" method="POST" className="mt-6 space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-slate-200 mb-2">
                       Your Name
