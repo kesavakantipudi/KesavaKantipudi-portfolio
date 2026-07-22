@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-const resumeUrl = new URL('../KesavaSaiVeerendra.pdf', import.meta.url).href;
+const resumeUrl = new URL('../Kesava-Kantipudi-Resume.pdf', import.meta.url).href;
 
 // Dynamically import all image files from the Images folder
 const imageModules = import.meta.glob('../Images/*.{png,jpg,jpeg}', { eager: true });
