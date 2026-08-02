@@ -10,7 +10,7 @@ This website is a fully responsive developer portfolio that includes:
 - **On-scroll animations** for all major sections
 - **6 featured projects** with GitHub links
 - **Social media profiles** (Facebook, Twitter, Instagram, LinkedIn, GitHub)
-- **Contact form** powered by Formspree
+- **Contact form** powered by a Discord webhook through a secure Vercel Function
 - **Responsive design** for mobile, tablet, and desktop
 - **Prefers-reduced-motion** support for accessibility
 - **Font Awesome icons** for social and skill visualization
@@ -22,7 +22,7 @@ This website is a fully responsive developer portfolio that includes:
 - Tailwind CSS
 - Framer Motion
 - Font Awesome 6.4.0
-- Formspree (for contact form)
+- Vercel Function (contact form → Discord webhook)
 
 ## Local Setup
 
@@ -67,17 +67,27 @@ The production build will be in the `dist/` folder.
 
 ## Contact Form Setup
 
+The contact form posts to a secure Vercel Function at `/api/contact`, which validates the
+submission and forwards it to a Discord channel as an embed. The webhook URL is stored only in
+an environment variable and is never exposed to the frontend.
+
 To enable the contact form:
 
-1. Visit [formspree.io](https://formspree.io)
-2. Sign up and create a new form
-3. Update the form action in `src/App.jsx` (line ~335):
+1. Create a Discord webhook for the channel you want notifications in:
+   Server Settings → Integrations → Webhooks → New Webhook.
+2. Copy the webhook URL and set it as the `DISCORD_WEBHOOK_URL` environment variable:
 
-```jsx
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+   - **Local development:** copy `.env.example` to `.env` and fill in the value.
+   - **Vercel:** add `DISCORD_WEBHOOK_URL` under Project → Settings → Environment Variables
+     for the production environment (and preview if desired), then redeploy.
+
+```bash
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/your_webhook_id/your_webhook_token
 ```
 
-Replace `YOUR_FORM_ID` with your actual Formspree form ID.
+The function rejects requests that are not `POST`, contain an invalid JSON body, are missing
+any required field (`name`, `email`, `subject`, `message`), or contain a malformed email with
+an appropriate HTTP status code.
 
 ## Live Site
 

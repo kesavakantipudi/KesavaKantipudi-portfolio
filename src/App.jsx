@@ -3,6 +3,12 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const resumeUrl = new URL('../Kesava-Kantipudi-Resume.pdf', import.meta.url).href;
 
+const initialFormData = { name: '', email: '', subject: '', message: '' };
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const baseInputClass =
+  'w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-slate-400 transition focus:bg-white/10 focus:border-sky-400 focus:outline-none';
+const baseInputErrorClass = 'border-red-400/70 focus:border-red-400';
+
 // Dynamically import all image files from the Images folder
 const imageModules = import.meta.glob('../Images/*.{png,jpg,jpeg}', { eager: true });
 const carouselImages = Object.values(imageModules)
@@ -102,6 +108,10 @@ export default function App() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { scrollY } = useScroll();
   const parallaxY = useTransform(scrollY, [0, 800], [0, 140]);
+  const [formData, setFormData] = useState(initialFormData);
+  const [fieldErrors, setFieldErrors] = useState({});
+  const [formStatus, setFormStatus] = useState('idle');
+  const [formMessage, setFormMessage] = useState('');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -109,6 +119,82 @@ export default function App() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (formStatus !== 'idle') {
+      setFormStatus('idle');
+      setFormMessage('');
+    }
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const validateForm = (data) => {
+    const errors = {};
+    if (!data.name.trim()) errors.name = 'Please enter your name.';
+    if (!data.email.trim()) {
+      errors.email = 'Please enter your email.';
+    } else if (!EMAIL_REGEX.test(data.email.trim())) {
+      errors.email = 'Please enter a valid email address.';
+    }
+    if (!data.subject.trim()) errors.subject = 'Please enter a subject.';
+    if (!data.message.trim()) errors.message = 'Please enter your message.';
+    return errors;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formStatus === 'loading') return;
+
+    const errors = validateForm(formData);
+    setFieldErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      setFormStatus('error');
+      setFormMessage('Please fix the highlighted fields and try again.');
+      return;
+    }
+
+    setFormStatus('loading');
+    setFormMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim(),
+          message: formData.message.trim()
+        })
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(result?.error || 'Failed to send your message. Please try again.');
+      }
+
+      setFormData(initialFormData);
+      setFieldErrors({});
+      setFormStatus('success');
+      setFormMessage('Your message has been sent. I will get back to you soon!');
+    } catch (error) {
+      setFormStatus('error');
+      setFormMessage(error?.message || 'Failed to send your message. Please try again.');
+    }
+  };
+
+  const handleClear = () => {
+    setFormData(initialFormData);
+    setFieldErrors({});
+    setFormStatus('idle');
+    setFormMessage('');
+  };
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
@@ -433,9 +519,24 @@ export default function App() {
 
               <div className={`rounded-[1.5rem] border p-8 backdrop-blur-sm transition-colors duration-300 ${isDark ? 'border-white/10 bg-white/5' : 'border-white/20 bg-white/10'}`}>
                 <h3 className={`text-xl font-semibold transition-colors duration-300 ${isDark ? 'text-white' : 'text-white'}`}>Send Me a Message</h3>
-                <form action="https://formspree.io/f/mdkzdovq" method="POST" className="mt-6 space-y-4">
+
+                {formStatus === 'success' && (
+                  <div role="status" className="mt-6 flex items-center gap-2 rounded-lg border border-emerald-400/40 bg-emerald-500/15 px-4 py-3 text-sm font-medium text-emerald-300">
+                    <i className="fas fa-check-circle" aria-hidden="true" />
+                    <span>{formMessage}</span>
+                  </div>
+                )}
+
+                {formStatus === 'error' && (
+                  <div role="alert" className="mt-6 flex items-start gap-2 rounded-lg border border-red-400/40 bg-red-500/15 px-4 py-3 text-sm font-medium text-red-300">
+                    <i className="fas fa-exclamation-triangle mt-0.5" aria-hidden="true" />
+                    <span>{formMessage}</span>
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-slate-200 mb-2">
+                    <label htmlFor="name" className="mb-2 block text-sm font-medium text-slate-200">
                       Your Name
                     </label>
                     <input
@@ -443,12 +544,19 @@ export default function App() {
                       id="name"
                       name="name"
                       placeholder="Kesava"
+                      value={formData.name}
+                      onChange={handleChange}
                       required
-                      className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-slate-400 transition focus:bg-white/10 focus:border-sky-400 focus:outline-none"
+                      aria-invalid={!!fieldErrors.name}
+                      aria-describedby={fieldErrors.name ? 'name-error' : undefined}
+                      className={`${baseInputClass} ${fieldErrors.name ? baseInputErrorClass : ''}`}
                     />
+                    {fieldErrors.name && (
+                      <p id="name-error" className="mt-2 text-sm text-red-400">{fieldErrors.name}</p>
+                    )}
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-slate-200 mb-2">
+                    <label htmlFor="email" className="mb-2 block text-sm font-medium text-slate-200">
                       Your Email
                     </label>
                     <input
@@ -456,12 +564,39 @@ export default function App() {
                       id="email"
                       name="email"
                       placeholder="you@example.com"
+                      value={formData.email}
+                      onChange={handleChange}
                       required
-                      className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-slate-400 transition focus:bg-white/10 focus:border-sky-400 focus:outline-none"
+                      aria-invalid={!!fieldErrors.email}
+                      aria-describedby={fieldErrors.email ? 'email-error' : undefined}
+                      className={`${baseInputClass} ${fieldErrors.email ? baseInputErrorClass : ''}`}
                     />
+                    {fieldErrors.email && (
+                      <p id="email-error" className="mt-2 text-sm text-red-400">{fieldErrors.email}</p>
+                    )}
                   </div>
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-slate-200 mb-2">
+                    <label htmlFor="subject" className="mb-2 block text-sm font-medium text-slate-200">
+                      Subject
+                    </label>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      placeholder="Project inquiry, collaboration, or opportunity"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      required
+                      aria-invalid={!!fieldErrors.subject}
+                      aria-describedby={fieldErrors.subject ? 'subject-error' : undefined}
+                      className={`${baseInputClass} ${fieldErrors.subject ? baseInputErrorClass : ''}`}
+                    />
+                    {fieldErrors.subject && (
+                      <p id="subject-error" className="mt-2 text-sm text-red-400">{fieldErrors.subject}</p>
+                    )}
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="mb-2 block text-sm font-medium text-slate-200">
                       Your Message
                     </label>
                     <textarea
@@ -469,16 +604,41 @@ export default function App() {
                       name="message"
                       placeholder="Tell me about your project or opportunity..."
                       rows={4}
+                      value={formData.message}
+                      onChange={handleChange}
                       required
-                      className="w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-slate-400 transition focus:bg-white/10 focus:border-sky-400 focus:outline-none resize-none"
+                      aria-invalid={!!fieldErrors.message}
+                      aria-describedby={fieldErrors.message ? 'message-error' : undefined}
+                      className={`${baseInputClass} resize-none ${fieldErrors.message ? baseInputErrorClass : ''}`}
                     />
+                    {fieldErrors.message && (
+                      <p id="message-error" className="mt-2 text-sm text-red-400">{fieldErrors.message}</p>
+                    )}
                   </div>
-                  <button
-                    type="submit"
-                    className="w-full rounded-lg bg-sky-600 px-6 py-3 font-semibold text-white transition hover:bg-sky-700 active:scale-95"
-                  >
-                    Send Message
-                  </button>
+                  <div className="flex gap-3">
+                    <button
+                      type="submit"
+                      disabled={formStatus === 'loading'}
+                      className="flex-1 rounded-lg bg-sky-600 px-6 py-3 font-semibold text-white transition hover:bg-sky-700 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-sky-600 disabled:active:scale-100"
+                    >
+                      {formStatus === 'loading' ? (
+                        <>
+                          <i className="fas fa-spinner fa-spin mr-2" aria-hidden="true" />
+                          Sending...
+                        </>
+                      ) : (
+                        'Send Message'
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleClear}
+                      disabled={formStatus === 'loading'}
+                      className="rounded-lg border border-white/20 bg-white/10 px-6 py-3 font-semibold text-white transition hover:bg-white/20 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100"
+                    >
+                      Clear
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
