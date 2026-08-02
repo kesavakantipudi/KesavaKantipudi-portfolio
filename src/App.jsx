@@ -15,9 +15,10 @@ const carouselImages = Object.values(imageModules)
   .map((module) => module.default)
   .filter((img) => img && !img.toLowerCase().includes('logo')) // Exclude logo from carousel
   .sort(); // Sort for consistent ordering
-const logoImage = Object.values(imageModules)
-  .map((module) => module.default)
-  .find((img) => img && img.toLowerCase().includes('logo')) || '';
+const logoModule = Object.entries(imageModules).find(([key]) => key.toLowerCase().endsWith('logo.png'));
+const logoDarkModule = Object.entries(imageModules).find(([key]) => key.toLowerCase().endsWith('logo_dark.png'));
+const logoImage = logoModule ? logoModule[1].default : '';
+const logoDarkImage = logoDarkModule ? logoDarkModule[1].default : logoImage;
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -219,7 +220,7 @@ export default function App() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
           <a href="#home" className="transition duration-300 hover:opacity-90">
             <img
-              src={logoImage}
+              src={isDark ? logoDarkImage : logoImage}
               alt="Kesava Kantipudi logo"
               className="h-10 w-auto max-w-[10rem] object-contain"
             />
